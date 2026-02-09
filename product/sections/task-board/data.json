@@ -1,0 +1,177 @@
+{
+  "_meta": {
+    "models": {
+      "tasks": "Each task represents a unit of work that a team member creates, tracks, and completes. Tasks have a global rank that determines their order across all views.",
+      "columns": "Columns are the status groupings used in the Kanban board. Each column represents a stage in the workflow that tasks move through.",
+      "labels": "Labels are tags applied to tasks for categorization. They help teams organize and filter tasks by topic or type.",
+      "users": "Users are the team members who can be assigned to tasks and collaborate on the project."
+    },
+    "relationships": [
+      "Each Task belongs to a Column (its current status) via the columnId field",
+      "Each Task can have one or more Labels referenced by labelIds",
+      "Each Task is assigned to a User via the assigneeId field",
+      "Columns define the workflow stages that tasks move through on the Kanban board"
+    ]
+  },
+  "users": [
+    {
+      "id": "user-001",
+      "name": "Sarah Rivera",
+      "avatarUrl": null
+    },
+    {
+      "id": "user-002",
+      "name": "James Kim",
+      "avatarUrl": null
+    },
+    {
+      "id": "user-003",
+      "name": "Alex Morgan",
+      "avatarUrl": null
+    }
+  ],
+  "labels": [
+    {
+      "id": "label-001",
+      "name": "Frontend",
+      "color": "sky"
+    },
+    {
+      "id": "label-002",
+      "name": "Backend",
+      "color": "emerald"
+    },
+    {
+      "id": "label-003",
+      "name": "Design",
+      "color": "violet"
+    },
+    {
+      "id": "label-004",
+      "name": "DevOps",
+      "color": "blue"
+    },
+    {
+      "id": "label-005",
+      "name": "Docs",
+      "color": "amber"
+    },
+    {
+      "id": "label-006",
+      "name": "Bug",
+      "color": "red"
+    }
+  ],
+  "columns": [
+    {
+      "id": "col-001",
+      "name": "To Do",
+      "order": 0
+    },
+    {
+      "id": "col-002",
+      "name": "In Progress",
+      "order": 1
+    },
+    {
+      "id": "col-003",
+      "name": "In Review",
+      "order": 2
+    },
+    {
+      "id": "col-004",
+      "name": "Done",
+      "order": 3
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-001",
+      "title": "Set up CI/CD pipeline",
+      "description": "Configure GitHub Actions for automated testing and deployment. Should run unit tests on every PR and deploy to staging on merge to main.",
+      "columnId": "col-001",
+      "priority": "high",
+      "assigneeId": "user-002",
+      "labelIds": ["label-004"],
+      "dueDate": "2025-02-20",
+      "rank": 1
+    },
+    {
+      "id": "task-002",
+      "title": "Design onboarding flow",
+      "description": "Create wireframes and high-fidelity mockups for the new user onboarding experience. Include empty states and first-task creation.",
+      "columnId": "col-001",
+      "priority": "medium",
+      "assigneeId": "user-003",
+      "labelIds": ["label-003"],
+      "dueDate": "2025-02-25",
+      "rank": 2
+    },
+    {
+      "id": "task-003",
+      "title": "Write API documentation",
+      "description": "",
+      "columnId": "col-001",
+      "priority": "low",
+      "assigneeId": "user-002",
+      "labelIds": ["label-005"],
+      "dueDate": null,
+      "rank": 3
+    },
+    {
+      "id": "task-004",
+      "title": "Implement auth endpoints",
+      "description": "Build login, signup, and token refresh endpoints. Use JWT with refresh token rotation. Need to integrate with the existing user model and add rate limiting to prevent brute force attempts.",
+      "columnId": "col-002",
+      "priority": "high",
+      "assigneeId": "user-003",
+      "labelIds": ["label-002"],
+      "dueDate": "2025-02-14",
+      "rank": 4
+    },
+    {
+      "id": "task-005",
+      "title": "Build task list component",
+      "description": "Create the list view component with sortable rows. Each row should display title, label, priority, assignee, and due date.",
+      "columnId": "col-002",
+      "priority": "medium",
+      "assigneeId": "user-001",
+      "labelIds": ["label-001"],
+      "dueDate": "2025-02-18",
+      "rank": 5
+    },
+    {
+      "id": "task-006",
+      "title": "Fix drag-and-drop flicker on fast moves",
+      "description": "When dragging cards quickly between columns, there's a brief visual flicker where the card appears in both the source and target column for one frame.",
+      "columnId": "col-003",
+      "priority": "high",
+      "assigneeId": "user-001",
+      "labelIds": ["label-001", "label-006"],
+      "dueDate": "2025-02-12",
+      "rank": 6
+    },
+    {
+      "id": "task-007",
+      "title": "Project scaffolding",
+      "description": "Initialize the monorepo structure with SvelteKit, configure Tailwind CSS v4, and set up the component library with shadcn-svelte.",
+      "columnId": "col-004",
+      "priority": "medium",
+      "assigneeId": "user-002",
+      "labelIds": ["label-004"],
+      "dueDate": "2025-02-05",
+      "rank": 7
+    },
+    {
+      "id": "task-008",
+      "title": "Database schema design",
+      "description": "Define the initial Postgres schema for tasks, columns, labels, and users. Include migration files and seed script.",
+      "columnId": "col-004",
+      "priority": "high",
+      "assigneeId": "user-003",
+      "labelIds": ["label-002"],
+      "dueDate": "2025-02-03",
+      "rank": 8
+    }
+  ]
+}

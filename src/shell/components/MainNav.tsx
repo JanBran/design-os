@@ -1,34 +1,41 @@
-import { MessageSquare } from 'lucide-react'
-
-interface MainNavProps {
-  productName: string
-  chatOpen: boolean
-  onToggleChat: () => void
+interface NavItem {
+  label: string
+  href: string
+  isActive?: boolean
 }
 
-export default function MainNav({ productName, chatOpen, onToggleChat }: MainNavProps) {
+interface MainNavProps {
+  items: NavItem[]
+  onNavigate?: (href: string) => void
+  collapsed?: boolean
+}
+
+export default function MainNav({ items, onNavigate, collapsed }: MainNavProps) {
   return (
-    <div className="flex items-center gap-3">
-      {/* Logo / Product name */}
-      <span className="text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-        {productName}
-      </span>
-
-      <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-700" />
-
-      {/* Chat toggle */}
-      <button
-        onClick={onToggleChat}
-        className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
-          chatOpen
-            ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
-            : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50'
-        }`}
-        title={chatOpen ? 'Hide chat' : 'Show chat'}
-      >
-        <MessageSquare className="w-4 h-4" strokeWidth={1.5} />
-        <span className="hidden sm:inline text-xs font-medium">Chat</span>
-      </button>
-    </div>
+    <nav className="space-y-0.5">
+      {items.map((item) => (
+        <button
+          key={item.href}
+          onClick={() => onNavigate?.(item.href)}
+          title={collapsed ? item.label : undefined}
+          className={`w-full flex items-center rounded-md transition-colors text-left ${
+            collapsed ? 'justify-center p-2.5' : 'gap-2.5 px-3 py-2 text-sm'
+          } ${
+            item.isActive
+              ? 'bg-blue-100 dark:bg-blue-900/30 text-slate-900 dark:text-blue-300 font-medium'
+              : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100'
+          }`}
+        >
+          <div
+            className={`w-4 h-4 rounded shrink-0 ${
+              item.isActive
+                ? 'bg-blue-400 dark:bg-blue-500'
+                : 'bg-slate-300 dark:bg-slate-700'
+            }`}
+          />
+          {!collapsed && item.label}
+        </button>
+      ))}
+    </nav>
   )
 }

@@ -2,28 +2,25 @@
 
 ## Entities
 
-### Task
-A unit of work that a team member creates, tracks, and completes. Tasks have a status, priority, and can be assigned to a user and tagged with labels. Tasks appear on Kanban boards and list views.
-
-### View
-A saved tab configuration that determines how tasks are displayed. Each view can be set to Kanban or List mode and has its own filter settings, allowing users to create multiple perspectives on the same set of tasks.
-
-### Column
-A status grouping used in Kanban boards (e.g., To Do, In Progress, Done). Columns define the workflow stages that tasks move through.
-
-### Label
-A tag that can be applied to tasks for categorization and filtering. Labels help teams organize and find tasks by topic, type, or any custom grouping.
+### Conversation
+A session of back-and-forth between a user and the AI, tied to a specific analytics context. Represents the top-level container for an AI interaction.
 
 ### Message
-A chat message in the global team chat panel. Messages enable real-time communication alongside the task view without switching to a separate app.
+A single turn in a conversation — either a user query or an AI response. AI messages include source traceability metadata linking the answer back to the semantic layer.
 
-### User
-A team member who can be assigned tasks, send chat messages, and configure their own views. Users are the people collaborating within the workspace.
+### Feedback
+A thumbs up or thumbs down rating attached to an AI message, optionally accompanied by a short written comment. Captures immediate signal on response quality.
+
+### FeedbackForm
+A structured set of feedback fields submitted for a specific AI message — including reason categories and free-text detail. Provides richer qualitative signal beyond a simple rating.
+
+### CsatSurvey
+A satisfaction survey triggered after a conversation ends, capturing an overall experience score and an optional comment. Measures end-to-end AI interaction quality.
 
 ## Relationships
 
-- Task belongs to a Column (its current status)
-- Task has many Labels
-- Task is assigned to a User
-- View has many Columns (defines which columns appear and their order)
-- Message belongs to a User (the sender)
+- Conversation has many Messages
+- Message belongs to a Conversation
+- Message has one Feedback (optional)
+- Message has one FeedbackForm (optional)
+- Conversation has one CsatSurvey (optional)
